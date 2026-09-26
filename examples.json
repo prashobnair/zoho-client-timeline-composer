@@ -1,0 +1,6 @@
+{"events":[
+  {"id":"call-1","type":"call","at":"2026-01-05T10:00:00+05:30","source_id":"fictional-call-1","visibility":"client","summary":"Fictional kickoff call","claim":{"key":"launch_date","value":"2026-02-01"}},
+  {"id":"email-1","type":"email_reference","at":"2026-01-06T09:00:00Z","source_id":"fictional-email-1","visibility":"internal","summary":"Internal email reference only; no message content","claim":{"key":"launch_date","value":"2026-02-15"}},
+  {"id":"deal-1","type":"deal","at":"2026-01-07T16:00:00+05:30","source_id":"fictional-deal-1","visibility":"client","summary":"Fictional agreement signed"},
+  {"id":"milestone-1","type":"milestone","at":"2026-01-08T10:00:00Z","source_id":"fictional-project-1","visibility":"internal","summary":"Internal delivery review"}
+]}
