@@ -1,27 +1,33 @@
-# Zoho Client Timeline Composer
+# zoho-client-timeline-composer (moved)
 
-An offline composer for a fictional client's calls, email *references*, deals and project milestones. It keeps source IDs with each event, sorts timezone-aware dates and flags contradictory claims for review. It has a separate internal/client view and filters internal records before producing client-facing conflict details. It does not read actual email, fetch CRM records or send a timeline to anyone.
+This project moved to [zoho-implementation-toolkit](https://github.com/prashobnair/zoho-implementation-toolkit) as the `timeline` module. Its full commit history was preserved there.
 
-## Contract use-case
+It composes a client-ready timeline from calls, emails, deals, and milestones — with a separate internal view for the delivery team.
 
-The [Zoho CRM contract board](https://www.upwork.com/freelance-jobs/zoho-crm/) sampled a client-history CRM configuration request, from first call onward. A [setup/cleanup brief](https://www.freelancer.com/projects/zoho-crm/zoho-crm-setup-cleanup) asks for data and custom-field organization. This prototype isolates the provenance and conflict-review slice, not a production CRM configuration or work for either poster.
-
-## Run
-
-Python 3.10+ and standard library only. From the repo root:
+## Use it now
 
 ```sh
-python3 cli.py examples.json
-python3 cli.py examples.json --audience client
-python3 -m unittest discover -p 'test_*.py' -v
+pip install https://github.com/prashobnair/zoho-implementation-toolkit/releases/download/v0.1.0/zohokit-0.1.0-py3-none-any.whl
 ```
 
-No Zoho trial, inbox connection, API key, Docker or paid plan is needed. The fictional sample has four events. Internal view shows four events and a launch-date conflict between a call and an internal email reference; client view shows only two permitted events and no disclosure of the internal claim. The CLI only prints local JSON. `DESIGN.md` covers provenance, permissions, tests and review.
+or
 
-## Data contract
+```sh
+uv tool install git+https://github.com/prashobnair/zoho-implementation-toolkit@v0.1.0
+```
 
-Every event needs unique `id`, a `type` (`call`, `email_reference`, `deal`, `milestone`), timezone-aware ISO `at`, `source_id`, `summary` and `visibility` (`internal`/`client`). Optional `claim` has key/value. Conflicts arise when visible events make different values for the same key. The tool does **not** choose which one is right; a person must review source records and audience restrictions. Source IDs are fictional opaque references, not valid Zoho IDs or retrievable links.
+The old `python cli.py events.json [--audience client]` is now:
 
-## Safety boundary
+```sh
+zohokit timeline compose events.json [--audience client]
+```
 
-Real clients may have audience-specific restrictions narrower than this two-level demo. A caller's statement, an email, or a deal stage may be stale or wrong. Never assume a timestamp or a last-write wins rule establishes truth. Before connecting to a real tenant, inspect current API metadata, permission model, content retention and source ownership, and test redaction and authorization on actual roles. Do not import employer, customer or real email data into this repository.
+The client view filters internal records before producing shareable details. Reports render with `--format json|table|markdown|html` and `--out`.
+
+## Links
+
+- Module guide: https://prashobnair.github.io/zoho-implementation-toolkit/modules/timeline/
+- What changed versus this repo: https://prashobnair.github.io/zoho-implementation-toolkit/legacy-parity/
+- Source: https://github.com/prashobnair/zoho-implementation-toolkit/tree/main/src/zohokit/modules/timeline
+
+This repository is archived and read-only.
